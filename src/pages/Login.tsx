@@ -1,7 +1,9 @@
 import { IonContent, IonIcon, IonPage, IonButton, IonItem, IonLabel, IonInput, IonCard, IonCardContent, IonGrid, IonRow, IonCol} from '@ionic/react';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { personCircleOutline } from 'ionicons/icons';
+import LogoPrincipal from '../components/LogoPrincipal';
+import BarraVerde from '../components/BarraVerde';
+import { authService } from '../services/authService';
 
 const Login: React.FC = () => {
     const history = useHistory();
@@ -13,59 +15,30 @@ const Login: React.FC = () => {
     const manejarIngreso = () => {
         const r = rut.trim() === '';
         const p = pass.trim() === '';
-        
+    
         setErrorRut(r);
         setErrorPass(p);
 
+        // Si no hay errores, llamamos al servicio
         if (!r && !p) {
-            history.push('/tab1'); 
+            const exito = authService.login(rut, pass);
+            if (exito) {
+                history.push('/tab1'); 
+            }
         }
     }
     return (
         <IonPage> {/*barra verde*/}
-            <div style={{ 
-                backgroundColor: '#B7F0DF',
-                height: '60px', 
-                width: '100%'  ,
-                display: 'flex', 
-                justifyContent: 'flex-end', 
-                alignItems: 'center', 
-                paddingRight: '20px',
-                gap: '20px',
-                color: '#333',
-                fontWeight: '500'
-            }}>
-
-                <span>Contacto</span>
-                <span>Ayuda</span>
-                <IonIcon icon={personCircleOutline} style={{ fontSize: '32px', color: 'black', cursor: 'pointer' }} />
-                           
-            </div>
+            <BarraVerde />
 
 
 
             <IonContent className='ion-padding' style={{ '--background': '#f5f5f5' }}>
             <IonGrid style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
                 <IonRow className="ion-align-items-center" style={{ width: '100%' }}>
+                    <LogoPrincipal />
         
-                {/*logi y titulo */}
-                <IonCol size="12" sizeMd="6" style={{ textAlign: 'center' }}>
-                    <div style={{ 
-                        backgroundColor: '#00875E', 
-                        borderRadius: '50%', 
-                        width: '220px', 
-                        height: '220px', 
-                        display: 'inline-flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'center',
-                        marginBottom: '20px'
-                    }}>
-                        <span style={{ color: 'white', fontSize: '320px', fontWeight: 'normal', lineHeight: '1' }}>+</span>
-                    </div>
-                    <h1 style={{ fontStyle: 'italic', fontWeight: '900', fontSize: '45px', color: '#333' }}>
-                        Telemedicina
-                    </h1>
-                </IonCol>
+                
 
                 {/*cuadro de iniciar seccion */}
                 <IonCol size="12" sizeMd="6">
