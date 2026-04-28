@@ -4,7 +4,7 @@ import { personCircleOutline } from 'ionicons/icons';
 
 
 {/*barra verde de arriba*/}
-const HeaderPublico: React.FC = () => (
+const BarraVerde: React.FC = () => (
     
     <div style={{ 
         backgroundColor: '#B7F0DF', height: '60px', width: '100%',
@@ -17,4 +17,4 @@ const HeaderPublico: React.FC = () => (
     </div>
 );
 
-export default HeaderPublico;
+export default BarraVerde;
