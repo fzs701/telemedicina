@@ -27,6 +27,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 setupIonicReact();
+{/*manejamos las pantallas*/}
 
 const App: React.FC = () => {
   return (
@@ -41,7 +42,7 @@ const App: React.FC = () => {
             <Redirect to="/login" />
           </Route>
 
-          {/* RUTAS PROTEGIDAS */}
+          
           <RutaProtegida exact path="/home" component={Home} />
           <RutaProtegida exact path="/chat" component={Chat} />
           <RutaProtegida exact path="/registro-estado" component={RegistrarEstado} />
