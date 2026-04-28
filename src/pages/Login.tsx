@@ -11,6 +11,12 @@ const Login: React.FC = () => {
     const [pass, setPass] = React.useState('');
     const [errorRut, setErrorRut] = React.useState(false);
     const [errorPass, setErrorPass] = React.useState(false);
+    
+    React.useEffect(() => {
+        if (authService.isAuthenticated()) {
+            history.replace('/home'); 
+        }
+    }, [history]);
 
     {/*constantes para hacer que usario escriba en cada campo antes de iniciar sesion*/}
     const manejarIngreso = () => {

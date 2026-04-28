@@ -2,14 +2,21 @@ import React, { useState } from 'react';
 import { IonCol, IonIcon } from '@ionic/react';
 import { homeOutline, calendarOutline, addOutline, medicalOutline, documentTextOutline, clipboardOutline, notificationsOutline, settingsOutline, chevronDownOutline, chevronForwardOutline, colorPaletteOutline, documentLockOutline, timeOutline } from 'ionicons/icons';
 import UserAvatar from './UserAvatar';
+import { authService } from '../services/authService';
+import { useHistory } from 'react-router-dom';
 import './MenuNavegacion.css';
 
 const MenuNavegacion: React.FC = () => {
     // controlar despliegue de configuración
     const [mostrarConfig, setMostrarConfig] = useState(false);
     const [mostrarCuenta, setMostrarCuenta] = useState(false);
+    const history = useHistory(); 
 
-    
+    //funcion de cerrar sesion
+    const cerrarSesion = () => {
+        authService.logout();
+        window.location.assign('/login'); 
+    };
 
     return (
         <IonCol size="3" className="columna-menu">
@@ -101,11 +108,12 @@ const MenuNavegacion: React.FC = () => {
                 </div>
 
                 {/*perfil de Marta Pérez */}
-                <div className="perfil-marta-contenedor">
+                
+                <div className="perfil-marta-contenedor" onClick={cerrarSesion} style={{ cursor: 'pointer' }}>
                     <UserAvatar size="40px" />
                     <div className="info-texto-perfil">
                         <span className="nombre-usuario">Marta Pérez</span>
-                        <span className="link-ver-perfil">Ver perfil</span>
+                        <span className="link-ver-perfil" style={{ color: 'red' }}>Cerrar Sesión</span>
                     </div>
                 </div>
             </div>
