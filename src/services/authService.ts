@@ -1,3 +1,4 @@
+//se separa la lógica para mantener codigo ordenado y no mezclar las funciones de validación con el diseño de las páginas
 export const authService = {
     // Simula un inicio de sesión
     login: (rut: string, pass: string) => {

@@ -1,10 +1,19 @@
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Login from './pages/Login';
-import Tab1 from './pages/Tab1';
 
-/* CSS Base de Ionic */
+// 1. Imports de páginas
+import Login from './pages/Login';
+import Home from './pages/Home';
+import Registro from './pages/Registro';
+import Chat from './pages/Chat';
+import RegistrarEstado from './pages/RegistrarEstado';
+
+// 2. Import del componente de protección (MUY IMPORTANTE EL ORDEN)
+import RutaProtegida from './components/RutaProtegida';
+
+// 3. Estilos de Ionic
 import '@ionic/react/css/core.css';
 import '@ionic/react/css/normalize.css';
 import '@ionic/react/css/structure.css';
@@ -15,30 +24,32 @@ import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
-import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-        <IonRouterOutlet>
-          {/* 1ra pantalla login */}
-          <Route exact path="/login">
-            <Login />
-          </Route>
-
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-
+const App: React.FC = () => {
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet id="main-content">
+          
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/registro" component={Registro} />
+          
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
+
+          {/* RUTAS PROTEGIDAS */}
+          <RutaProtegida exact path="/home" component={Home} />
+          <RutaProtegida exact path="/chat" component={Chat} />
+          <RutaProtegida exact path="/registro-estado" component={RegistrarEstado} />
+
         </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;

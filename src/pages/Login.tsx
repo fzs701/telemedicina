@@ -12,6 +12,7 @@ const Login: React.FC = () => {
     const [errorRut, setErrorRut] = React.useState(false);
     const [errorPass, setErrorPass] = React.useState(false);
 
+    {/*constantes para hacer que usario escriba en cada campo antes de iniciar sesion*/}
     const manejarIngreso = () => {
         const r = rut.trim() === '';
         const p = pass.trim() === '';
@@ -23,13 +24,14 @@ const Login: React.FC = () => {
         if (!r && !p) {
             const exito = authService.login(rut, pass);
             if (exito) {
-                history.push('/tab1'); 
+                history.push('/home');
             }
         }
     }
+
     return (
-        <IonPage> {/*barra verde*/}
-            <BarraVerde />
+        <IonPage> 
+            <BarraVerde /> {/*barra verde de arriba*/}
 
 
 
@@ -52,13 +54,14 @@ const Login: React.FC = () => {
                         <h2 style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '35px', marginBottom: '30px', color: '#000' }}>
                             Iniciar sesión
                         </h2>
-              
+                        
+                        {/* campo rut */}
                         <div style={{ padding: '0 10px', marginBottom: '20px' }}>
                             <p style={{ margin: '0 0 8px 4px', color: 'black', fontWeight: '500', fontSize: '16px', textAlign: 'left' }}>
                                 Rut
                             </p>
-                            <IonInput fill="outline" 
-                            onIonInput={(e: any) => setRut(e.target.value)}
+
+                            <IonInput type="text" fill="outline" onIonInput={(e: any) => setRut(e.target.value)}
                             style={{'--border-color': errorRut ? 'red' : '#ccc', '--border-radius': '8px',backgroundColor: 'white' }}></IonInput>
                         
                             {errorRut && (
@@ -67,12 +70,15 @@ const Login: React.FC = () => {
                                 Dato Requerido
                             </p>
                         )}
-                        </div>
 
+                        </div>
+                        
+                        {/* campo contraseña */}
                         <div style={{ padding: '0 10px', marginBottom: '20px' }}>
                             <p style={{ margin: '0 0 8px 4px', color: 'black', fontWeight: '500', fontSize: '16px', textAlign: 'left' }}>
                                 Contraseña
                             </p>
+
                             <IonInput fill="outline" type="password"
                             onIonInput={(e: any) => setPass(e.target.value)}
                             style={{'--border-color': errorPass ? 'red' : '#ccc', '--border-radius': '8px',backgroundColor: 'white' }}></IonInput>
@@ -86,36 +92,46 @@ const Login: React.FC = () => {
 
                         
 
-
+                        {/* comentario si olvida contraseña */}
                         <p style={{ textAlign: 'right', color: 'black', marginBottom: '24px', cursor: 'pointer' }}>
                             Olvidé mi contraseña
                         </p>
-
+ 
+                        {/*boton para incipar sesion con datos contra y rut, y no puede saltarse un campo*/}
                         <IonButton expand='block' onClick={manejarIngreso} 
                             style={{ '--background': '#00875E', height: '50px', fontWeight: 'bold' }}
                         >
                             Iniciar sesión
                         </IonButton>
                         
+                        {/*boton para registrar e ir a la pagina que sigue y registrarse*/}
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <p style={{ color: '#00875E' , fontWeight: '600' }}>
-                                Crear cuenta
-                            </p>
+                            <p onClick={() => history.push('/registro')} 
+                               style={{ 
+                                color: '#00875E', 
+                                fontWeight: '600', 
+                                cursor: 'pointer', 
+                                textDecoration: 'underline' }}>
+                                    
+                                Crear cuenta </p>
                         </div>
 
                     </IonCardContent>
                     </IonCard>
+
                 </IonCol>
 
                 </IonRow>
+
             </IonGrid>
             </IonContent>
   
   
-            <div style={{ backgroundColor: '#B7F0DF', height: '40px', width: '100%' }}></div>
+            <div style={{ backgroundColor: '#B7F0DF', height: '40px', width: '100%' }}></div> {/*Barra de abajo */}
 
 
         </IonPage>
     );
 }
 export default Login;
+

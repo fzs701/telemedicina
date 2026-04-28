@@ -1,6 +1,7 @@
 import React from 'react';
 import { IonCol } from '@ionic/react';
 
+
 const LogoPrincipal: React.FC = () => (
     <IonCol size="12" sizeMd="6" style={{ textAlign: 'center' }}>
         <div style={{ 

@@ -1,0 +1,138 @@
+/*columna pantalla*/
+.columna-menu {
+    background-color: #FFFFFF;
+    height: 100vh;           
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    z-index: 10;
+    border: 1px solid #4F4F4F;
+}
+
+/*scroll interno*/
+.contenedor-scroll {
+    overflow-y: auto;
+    flex: 1;
+    padding: 25px;           
+    display: flex;
+    flex-direction: column;
+}
+
+.boton-registrar-salud {
+    background-color: #00875E;
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.lista-navegacion {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.item-inicio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: #61D4B3;
+    border-radius: 10px;
+    color: white;
+}
+
+.item-menu-normal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    color: #333;
+}
+
+.titulo-seccion {
+    font-size: 12px;
+    color: #666;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.item-servicio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    color: #333;
+}
+
+.item-cuenta-expandible {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.contenedor-cuenta-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sub-menu-cuenta {
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    border-left: 2px solid #00875E;
+    margin-left: 18px;
+}
+
+.sub-item-cuenta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.seccion-inferior-perfil {
+    padding: '15px 25px'; 
+    border-top: 1px solid #F0F0F0;
+    background-color: #FFFFFF;
+}
+
+.boton-menu-figma {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.perfil-marta-contenedor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.info-texto-perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+.nombre-usuario {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+.link-ver-perfil {
+    font-size: 11px;
+    color: #00875E;
+}
