@@ -39,4 +39,6 @@ Una vez finalizada la instalación, ejecuta:
 
 La aplicación se abrirá automáticamente en navegador predeterminado.
 
+(En carpeta **otros** se encuentra documentación proyecto)
+
 
