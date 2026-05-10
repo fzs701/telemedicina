@@ -28,7 +28,7 @@ Instrucciones de Ejecución:
 6. Instalar Dependencias (Paso Obligatorio): En la terminal, ejecuta:
 
 
-npm install
+   **npm install**
 
 Este proceso descargará todas las librerías necesarias para que el proyecto funcione.
 
