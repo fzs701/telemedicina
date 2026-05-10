@@ -37,6 +37,7 @@ const App: React.FC = () => {
     return (
         <IonApp>
             <IonReactRouter>
+                
                 <IonRouterOutlet id="main-content">
                     {/* rutas fijas*/}
                     <Route exact path="/login" component={Login} />
@@ -48,7 +49,7 @@ const App: React.FC = () => {
                     <RutaProtegida exact path="/registro-estado" component={RegistrarEstado} />
                     
                     <Route exact path="/">
-                          <Redirect to={estaAutenticado ? "/home" : "/login"} />
+                          <Redirect to="/login" />
                     </Route>
 
                 </IonRouterOutlet>

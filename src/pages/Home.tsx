@@ -5,6 +5,7 @@ import MenuNavegacion from '../components/MenuNavegacion';
 import { videocamOutline, notificationsOutline } from 'ionicons/icons';
 import UserAvatar from '../components/UserAvatar';
 import './Home.css';
+import { authService } from '../services/authService';
 
 const Home: React.FC = () => {
     const router = useIonRouter();
@@ -17,6 +18,7 @@ const Home: React.FC = () => {
             <IonContent style={{ '--background': '#ffffff' }}>
                 <IonGrid fixed={true} style={{ padding: 0, margin: 0, height: '100vh' }}>
                     <IonRow className="fila-principal">
+                        
                         
                         <MenuNavegacion /> {/*componente menu izquierda*/}
 
