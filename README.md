@@ -5,15 +5,15 @@ Tema: **Tema 3 Bajo desarrollo de telemedicina y herramientas digitales**: Aunqu
 Descripción: Este proyecto consiste en una aplicación multiplataforma desarrollada con Ionic y React, diseñada para modernizar el seguimiento de pacientes crónicos. La solución permite el registro de signos vitales, la gestión de alertas según la gravedad del estado de salud y facilita la comunicación directa entre médico y paciente. El enfoque principal es transformar la atención médica en un modelo proactivo y preventivo.
 
 
-Requisitos Previos: Antes de comenzar, se debe tener instalado lo siguiente:
+**Requisitos Previos**: Antes de comenzar, se debe tener instalado lo siguiente:
 
 1. **Node.js**  (https://nodejs.org/en/download)
 
-2. Ionic CLI: Se instala globalmente con el comando:
+2. Ionic CLI: Se instala globalmente con el comando.
 
 3. Visual Studio Code 
 
-Instrucciones de Ejecución:
+**Instrucciones de Ejecución**:
 
 1. Descarga el proyecto como un archivo .zip desde el repositorio y descomprímelo en tu computador.
 
