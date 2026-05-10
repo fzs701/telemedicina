@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { authService } from './services/authService';
+
 
 //imports de páginas
 import Login from './pages/Login';
@@ -33,7 +34,10 @@ setupIonicReact();
 
 const App: React.FC = () => {
 
-    const estaAutenticado = authService.isAuthenticated();// Leemos si hay sesión
+    useEffect(() => {
+        authService.logout(); // borra sesión al abrir app
+    }, []);
+
     return (
         <IonApp>
             <IonReactRouter>

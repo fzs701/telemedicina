@@ -9,6 +9,7 @@ import { authService } from '../services/authService';
 
 const Home: React.FC = () => {
     const router = useIonRouter();
+  const autenticado = authService.isAuthenticated();
 
     return (
         <IonPage>
@@ -20,7 +21,8 @@ const Home: React.FC = () => {
                     <IonRow className="fila-principal">
                         
                         
-                        <MenuNavegacion /> {/*componente menu izquierda*/}
+                        
+                        <MenuNavegacion />
 
                         <IonCol size="9" className="columna-contenido">
                              
