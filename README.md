@@ -19,11 +19,13 @@ Instrucciones de Ejecución:
 
 2. Abrir en Visual Studio Code
 
-3. Ve a Archivo > Abrir Carpeta y selecciona la carpeta descompresa
+3. Ve a Archivo > Abrir Carpeta (folder) y selecciona la carpeta descompresa
 
-4. Abrir Terminal en VS Code: * Ve al menú superior y selecciona Terminal > Nuevo Terminal.
+4. Abrir Terminal en VS Code:  Ve al menú superior y selecciona Terminal > Nuevo Terminal.
 
-5. Instalar Dependencias (Paso Obligatorio): * En la terminal que se abrió dentro de VS Code, ejecuta:
+5. En la terminal escribir: **cd telemedicina-master** (solo si no se abrió automáticamente en esa ruta).
+
+6. Instalar Dependencias (Paso Obligatorio): En la terminal, ejecuta:
 
 
 npm install
