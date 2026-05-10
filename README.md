@@ -35,7 +35,7 @@ Este proceso descargará todas las librerías necesarias para que el proyecto fu
 Una vez finalizada la instalación, ejecuta:
 
 
-**ionic serve**
+   **ionic serve**
 
 La aplicación se abrirá automáticamente en navegador predeterminado.
 
