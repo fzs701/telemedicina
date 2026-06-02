@@ -1,4 +1,10 @@
-Requisitos Previos: Antes de comenzar, se debe tener instalado lo siguiente:
+Integrante: Francisca Zamora
+
+Tema: Tema 3 Bajo desarrollo de telemedicina y herramientas digitales: Aunque se propone fortalecer la telemedicina, aún no se implementan soluciones tecnológicas para consultas remotas y seguimiento de pacientes.
+
+Descripción: Este proyecto consiste en una aplicación multiplataforma desarrollada con Ionic y React, diseñada para modernizar el seguimiento de pacientes crónicos. La solución permite el registro de signos vitales, la gestión de alertas según la gravedad del estado de salud y facilita la comunicación directa entre médico y paciente. El enfoque principal es transformar la atención médica en un modelo proactivo y preventivo.
+
+**Requisitos Previos**: Antes de comenzar, se debe tener instalado lo siguiente:
 
 Node.js (https://nodejs.org/en/download)
 
