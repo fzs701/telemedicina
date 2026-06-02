@@ -14,6 +14,12 @@ Visual Studio Code
 
 MySQL Server (Con una base de datos local llamada telemedicina_db)
 
+Para esta entrega, el sistema se ha desacoplado y estructurado en dos carpetas independientes dentro de la raíz principal:
+
+**Ionic-Telemedicina**: Contiene todo el código de la aplicación móvil (Frontend) desarrollado en Ionic React.
+
+**nodejs-Telemedicina**: Contiene toda la lógica del servidor y la API REST (Backend) desarrollada en Node.js con Express y Prisma.
+
 **Instrucciones de Ejecución**:
 
 1. Descarga el proyecto como un archivo .zip desde el repositorio y descomprímelo en tu computador.
@@ -21,12 +27,6 @@ MySQL Server (Con una base de datos local llamada telemedicina_db)
 2. Abrir en Visual Studio Code
 
 3. Ve a Archivo > Abrir Carpeta (folder) y selecciona la carpeta descompresa
-
-Para esta entrega, el sistema se ha desacoplado y estructurado en dos carpetas independientes dentro de la raíz principal:
-
-**Ionic-Telemedicina**: Contiene todo el código de la aplicación móvil (Frontend) desarrollado en Ionic React.
-
-**nodejs-Telemedicina**: Contiene toda la lógica del servidor y la API REST (Backend) desarrollada en Node.js con Express y Prisma.
 
 4. Abrir Terminal en VS Code: Ve al menú superior y selecciona Terminal > Nuevo Terminal.
 
@@ -36,29 +36,33 @@ Para esta entrega, el sistema se ha desacoplado y estructurado en dos carpetas i
 
 En la terminal escribir: **cd nodejs-Telemedicina**
 
-Instalar Dependencias (Paso Obligatorio): En la terminal, ejecuta:
+1. Instalar Dependencias (Paso Obligatorio): En la terminal, ejecuta:
 
-**npm install**
+     **npm install**
 
-Luego, Levantar el servidor Express:
+2. Generar el Cliente de Prisma
+   
+    **npx prisma generate**
 
-**npm run start**
+3. Luego, Levantar el servidor Express:
+
+   **npm run dev**
 
 **Frontend** (ver pagina)
 
-Abrir otra terminal:
+1. Abrir otra terminal:
 
-En la terminal escribir: **cd Ionic-Telemedicina**
+   En la terminal escribir: **cd Ionic-Telemedicina**
 
-Instalar Dependencias (Paso Obligatorio): En la terminal, ejecuta:
+2. Instalar Dependencias (Paso Obligatorio): En la terminal, ejecuta:
 
-**npm install**
+    **npm install**
 
-Este proceso descargará todas las librerías necesarias para que el proyecto funcione.
+     Este proceso descargará todas las librerías necesarias para que el proyecto funcione.
 
-Una vez finalizada la instalación, ejecuta:
+3. Una vez finalizada la instalación, ejecuta:
 
-ionic serve
+    **ionic serve**
 
 La aplicación se abrirá automáticamente en navegador predeterminado.
 
