@@ -20,7 +20,7 @@ MySQL Server (Con una base de datos local llamada telemedicina_db)
 
 2. Abrir en Visual Studio Code
 
-Ve a Archivo > Abrir Carpeta (folder) y selecciona la carpeta descompresa
+3. Ve a Archivo > Abrir Carpeta (folder) y selecciona la carpeta descompresa
 
 Para esta entrega, el sistema se ha desacoplado y estructurado en dos carpetas independientes dentro de la raíz principal:
 
@@ -28,9 +28,9 @@ Para esta entrega, el sistema se ha desacoplado y estructurado en dos carpetas i
 
 **nodejs-Telemedicina**: Contiene toda la lógica del servidor y la API REST (Backend) desarrollada en Node.js con Express y Prisma.
 
-Abrir Terminal en VS Code: Ve al menú superior y selecciona Terminal > Nuevo Terminal.
+4. Abrir Terminal en VS Code: Ve al menú superior y selecciona Terminal > Nuevo Terminal.
 
-En la terminal escribir: **cd telemedicina-master** (solo si no se abrió automáticamente en esa ruta).
+5. En la terminal escribir: **cd telemedicina-master** (solo si no se abrió automáticamente en esa ruta).
 
 **Backend** (primeros pasos)
 
