@@ -1,0 +1,86 @@
+/* Estilo del contenido principal */
+.contenido-fondo-login {
+    --background: #f5f5f5;
+}
+
+/* Grilla centrada */
+.grilla-login-central {
+    height: 100%; 
+    display: flex; 
+    align-items: center;
+}
+
+/* Fila de ancho completo */
+.fila-login-ancho {
+    width: 100%;
+}
+
+/* cuadro de iniciar seccion */
+.tarjeta-login-principal {
+    max-width: 450px; 
+    margin: auto; 
+    border-radius: 15px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Titulo Iniciar sesion */
+.titulo-principal-login {
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 35px; 
+    margin-bottom: 30px; 
+    color: #000;
+}
+
+/* Etiquetas de Rut y Contrasena */
+.texto-etiqueta-campo {
+    margin: 0 0 8px 4px; 
+    color: black; 
+    font-weight: 500; 
+    font-size: 16px; 
+    text-align: left;
+}
+
+/* Inputs con fondo blanco */
+.input-estilo-blanco {
+    --border-radius: 8px;
+    background-color: white;
+}
+
+/* Mensajes de error en rojo */
+.error-dato-requerido {
+    color: red; 
+    font-size: 10px; 
+    margin: 4px 0 0 4px; 
+    font-weight: bold;
+}
+
+/* comentario si olvida contrasena */
+.texto-olvido-contrasena {
+    text-align: right; 
+    color: black; 
+    margin-bottom: 24px; 
+    cursor: pointer;
+}
+
+/* boton para incipar sesion */
+.boton-ingreso-verde {
+    --background: #00875E; 
+    height: 50px; 
+    font-weight: bold;
+}
+
+/* boton para registrar */
+.link-crear-cuenta-login {
+    color: #00875E; 
+    font-weight: 600; 
+    cursor: pointer; 
+    text-decoration: underline;
+}
+
+/* Barra de abajo */
+.barra-decorativa-inferior {
+    background-color: #B7F0DF; 
+    height: 40px; 
+    width: 100%;
+}

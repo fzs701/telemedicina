@@ -1,0 +1,85 @@
+/*contenedor principal del Chat */
+.contenedor-principal-chat {
+    flex: 1;
+    background-color: #B6E6EB;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #B2DFDB;
+}
+
+/*cabecera interna del chat */
+.cabecera-chat {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.cabecera-chat h3 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cabecera-chat p {
+    margin: 0;
+    font-size: 10px;
+    color: #666;
+}
+
+/*burbujas de mensajes */
+.area-mensajes {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.burbuja-recibida {
+    align-self: flex-start;
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 0 20px 20px 20px;
+    max-width: 70%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 13px;
+}
+
+.burbuja-enviada {
+    align-self: flex-end;
+    background-color: #CEFFDA;
+    padding: 15px 20px;
+    border-radius: 20px 20px 0 20px;
+    max-width: 70%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/*barra de entrada texto inferior */
+.barra-entrada-contenedor {
+    padding: 20px;
+    background-color: transparent;
+}
+
+.caja-entrada-blanca {
+    background-color: white;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.icono-adjuntar {
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+}
+
+.input-mensaje {
+    --padding-start: 10px;
+    font-size: 14px;
+}
