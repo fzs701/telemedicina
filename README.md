@@ -56,7 +56,7 @@ En la terminal escribir: **cd nodejs-Telemedicina**
 
 2. Instalar Dependencias (Paso Obligatorio): En la terminal, ejecuta:
 
-    **npm install**
+    **npm install** (en caso de error, recomiendo usar esto **npm install --legacy-peer-deps**)
 
      Este proceso descargará todas las librerías necesarias para que el proyecto funcione.
 
@@ -66,4 +66,28 @@ En la terminal escribir: **cd nodejs-Telemedicina**
 
 La aplicación se abrirá automáticamente en navegador predeterminado.
 
-(En carpeta otros se encuentra documentación proyecto)
+**(En carpeta otros se encuentra documentación proyecto)**
+
+Recomendación de usar estos datos si lo desea para comprobar proyecto:
+
+99.999.999-9
+doctora123
+
+12.345.678-2
+marta123
+
+11.111.111-1
+123
+
+88.888.888-8
+doctora2026
+
+44.444.444-4
+pedro123
+
+77.777.777-7
+ana123
+
+55.555.555-5
+roberto123
+
