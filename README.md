@@ -12,6 +12,8 @@ Ionic CLI: Se instala globalmente con el comando.
 
 Visual Studio Code
 
+MySQL Workbench
+
 MySQL Server (Con una base de datos local llamada telemedicina_db)
 
 Para esta entrega, el sistema se ha desacoplado y estructurado en dos carpetas independientes dentro de la raíz principal:
@@ -40,11 +42,22 @@ En la terminal escribir: **cd nodejs-Telemedicina**
 
      **npm install**
 
-2. Generar el Cliente de Prisma
+2. En la raíz de la carpeta nodejs-Telemedicina, cree un archivo nuevo llamado exactamente .env y pegue su línea de conexión con su usuario y contraseña de MySQL Server / Workbench:
+
+    DATABASE_URL="mysql://TU_USUARIO:TU_CONTRASENA@localhost:3306/telemedicina_db?schema=sys"
+
+   - Cambie TU_USUARIO por su usuario de MySQL (que casi siempre es root).
+
+   - Cambie TU_CONTRASENA por la clave con la que usted entra a su Workbench.
+
+3. Generar el Cliente de Prisma
    
     **npx prisma generate**
+   
+4. crear todas las tablas de forma automática:
+    **npx prisma db push**
 
-3. Luego, Levantar el servidor Express:
+5. Luego, Levantar el servidor Express:
 
    **npm run dev**
 
@@ -68,26 +81,4 @@ La aplicación se abrirá automáticamente en navegador predeterminado.
 
 **(En carpeta otros se encuentra documentación proyecto)**
 
-Recomendación de usar estos datos si lo desea para comprobar proyecto:
-
-99.999.999-9
-doctora123
-
-12.345.678-2
-marta123
-
-11.111.111-1
-123
-
-88.888.888-8
-doctora2026
-
-44.444.444-4
-pedro123
-
-77.777.777-7
-ana123
-
-55.555.555-5
-roberto123
 
