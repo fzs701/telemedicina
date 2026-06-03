@@ -82,6 +82,6 @@ En la terminal escribir: **cd nodejs-Telemedicina**
 
 La aplicación se abrirá automáticamente en navegador predeterminado.
 
-**(En carpeta otros se encuentra documentación proyecto)**
+(En Ionic-telemedicina, en carpeta **otros** se encuentra documentación proyecto)
 
 
