@@ -55,11 +55,14 @@ En la terminal escribir: **cd nodejs-Telemedicina**
     **npx prisma generate**
    
 4. crear todas las tablas de forma automática:
+   
     **npx prisma db push**
 
-5. Luego, Levantar el servidor Express:
+6. Luego, Levantar el servidor Express:
 
    **npm run dev**
+
+   Una vez visto esto **Servidor escuchando en: http://localhost:3000** avanzar a:
 
 **Frontend** (ver pagina)
 
@@ -79,6 +82,6 @@ En la terminal escribir: **cd nodejs-Telemedicina**
 
 La aplicación se abrirá automáticamente en navegador predeterminado.
 
-**(En carpeta otros se encuentra documentación proyecto)**
+(En Ionic-telemedicina, en carpeta **otros** se encuentra documentación proyecto)
 
 
