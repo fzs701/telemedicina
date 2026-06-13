@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IonCol, IonIcon } from '@ionic/react';
-import { homeOutline, calendarOutline, addOutline, medicalOutline, documentTextOutline, clipboardOutline, notificationsOutline, settingsOutline, chevronDownOutline, chevronForwardOutline, colorPaletteOutline, documentLockOutline, timeOutline } from 'ionicons/icons';
+import {personOutline, shieldCheckmarkOutline, homeOutline, calendarOutline, addOutline, medicalOutline, documentTextOutline, clipboardOutline, notificationsOutline, settingsOutline, chevronDownOutline, chevronForwardOutline, colorPaletteOutline, documentLockOutline, timeOutline } from 'ionicons/icons';
 import UserAvatar from './UserAvatar';
 import { authService } from '../services/authService';
 import { useHistory } from 'react-router-dom';
@@ -26,46 +26,43 @@ const MenuNavegacion: React.FC = () => {
             <div className="contenedor-scroll">
                 
                 {/*titulo*/}
-                <div className="boton-registrar-salud">
-                    Registrar estado de salud
+                <div className="boton-registrar-salud" onClick={() => history.push('/registro-estado')} // Redirige a tu formulario diario
+                     style={{ cursor: 'pointer' }}>
+                      Registrar estado de salud
                 </div>
-                
+
                 {/*icono inicio*/}
                 <div className="lista-navegacion">
-                    <div className="item-inicio">
-                        <IonIcon icon={homeOutline} /> Inicio
+                    <div className="item-inicio" onClick={() => { const rol = localStorage.getItem('usuarioRol');
+                        history.push(rol === 'medico' ? '/medico-dashboard' : '/home'); }}
+                        style={{ cursor: 'pointer' }}>
+                          <IonIcon icon={homeOutline} /> Inicio
                     </div>
-
-                    {/*icono cita*/}
-                    <div className="item-menu-normal">
+                    
+                    <div className="item-menu-normal" onClick={() => history.push('/citas')} style={{ cursor: 'pointer' }}>
                         <IonIcon icon={calendarOutline} /> Citas
                     </div>
-
-                    {/*icono agendar*/}
-                    <div className="item-menu-normal">
+                    
+                    <div className="item-menu-normal" onClick={() => history.push('/agendar-cita')} style={{ cursor: 'pointer' }}>
                         <IonIcon icon={addOutline} /> Agendar
                     </div>
 
-                    {/*despliegue servicios*/}
                     <p className="titulo-seccion">Servicios</p>
 
-                    {/*icono indicacion*/}
-                    <div className="item-servicio">
+                    <div className="item-servicio" onClick={() => history.push('/indicaciones')} style={{ cursor: 'pointer' }}>
                         <IonIcon icon={medicalOutline} /> Indicación
                     </div>
 
-                    {/*icono recetas medicas*/}
-                    <div className="item-servicio">
+                    <div className="item-servicio" onClick={() => history.push('/recetas')} style={{ cursor: 'pointer' }}>
                         <IonIcon icon={documentTextOutline} /> Recetas médicas
                     </div>
 
-                    {/*icono examenes*/}
-                    <div className="item-servicio">
-                        <IonIcon icon={clipboardOutline} /> Exámenes
+                    <div className="item-servicio" onClick={() => history.push('/examenes')} style={{ cursor: 'pointer' }}>
+                         <IonIcon icon={clipboardOutline} /> Exámenes
                     </div>
 
-                    {/*icono seguimiento*/}
-                    <div className="item-servicio">
+                    {/* boton seguimiento */}
+                    <div className="item-servicio" onClick={() => history.push('/seguimiento')} style={{ cursor: 'pointer' }}>
                         <IonIcon icon={notificationsOutline} /> Seguimiento indicaciones
                     </div>
 
@@ -75,8 +72,7 @@ const MenuNavegacion: React.FC = () => {
                     
                     <div 
                         onClick={() => setMostrarCuenta(!mostrarCuenta)} 
-                        className="item-cuenta-expandible"
-                    >
+                        className="item-cuenta-expandible">
                         <div className="contenedor-cuenta-label">
                             <IonIcon icon={settingsOutline} /> 
                             <span>Cuenta</span>
@@ -86,38 +82,37 @@ const MenuNavegacion: React.FC = () => {
 
                     {mostrarCuenta && (
                         <div className="sub-menu-cuenta">
-                            <div className="sub-item-cuenta">
-                                <IonIcon icon={colorPaletteOutline} /> Cambiar Color
-                            </div>
-                            <div className="sub-item-cuenta">
-                                <IonIcon icon={documentLockOutline} /> Términos y Cond.
-                            </div>
-                            <div className="sub-item-cuenta">
-                                <IonIcon icon={timeOutline} /> Horarios
-                            </div>
+                          <div onClick={() => history.push('/terminos')} style={{ cursor: 'pointer' }}>
+                              <IonIcon icon={shieldCheckmarkOutline} /> Términos y Cond.
+                          </div>
+
+                          <div onClick={() => history.push('/horarios')} style={{ cursor: 'pointer' }}>
+                              <IonIcon icon={timeOutline} /> Horarios
+                          </div>
                         </div>
                     )}
                 </div> 
             </div>
 
             <div style={{ padding: '15px 25px', borderTop: '1px solid #F0F0F0', backgroundColor: '#FFFFFF' }}>
-                
-                {/*menu */}
-                <div className="boton-menu-figma">
-                    <UserAvatar size="20px" /> 
-                    <span style={{ fontSize: '14px', fontWeight: '500', color: '#333' }}>Menú</span>
+            {/* menu */}
+                <div style={{ padding: '10px 0', marginBottom: '10px' }}>
+                  <div onClick={() => history.push('/resumen-general')} 
+                      style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', padding: '10px', borderRadius: '8px'}}>
+                      <IonIcon icon={personOutline} style={{ fontSize: '22px', color: '#333' }} />
+                          <span style={{ fontWeight: '500', color: '#333', fontSize: '14px' }}>Menú</span>
+                  </div>
                 </div>
 
-                {/*perfil de Marta Pérez */}
-                
-                <div className="perfil-marta-contenedor" onClick={cerrarSesion} style={{ cursor: 'pointer' }}>
-                    <UserAvatar size="40px" />
-                    <div className="info-texto-perfil">
-                        <span className="nombre-usuario">{nombreUsuario}</span>
-                        <span className="link-ver-perfil" style={{ color: 'red' }}>Cerrar Sesión</span>
-                    </div>
-                </div>
+            {/* perfil dinámico */}
+            <div className="perfil-marta-contenedor" onClick={cerrarSesion} style={{ cursor: 'pointer' }}>
+              <UserAvatar size="40px" />
+                  <div className="info-texto-perfil">
+                    <span className="nombre-usuario">{nombreUsuario}</span>
+                    <span className="link-ver-perfil" style={{ color: 'red' }}>Cerrar Sesión</span>
+                  </div>
             </div>
+          </div>
             
 
         </IonCol>

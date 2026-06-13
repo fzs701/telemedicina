@@ -19,7 +19,10 @@ model Usuario {
   correo      String   @unique
   contrasena  String   
   rol         String   // "paciente" o "medico"
+  region      String?  
+  comuna      String?
   fechaCreacion DateTime @default(now())
+  
 
   // Relación Médico-Paciente 
   medicoId      String?
@@ -41,5 +44,53 @@ model RegistroSalud {
   observaciones   String? 
   estado          String   
   fechaCreacion   DateTime @default(now())
+  @@index([usuarioId])      
+  @@index([fechaCreacion])
 }
 
+model Cita {
+  id        String   @id @default(uuid())
+  usuarioId String
+  medicoId  String
+  fecha     String   // Guardamos la fecha elegida como texto ("2026-06-28")
+  hora      String   // Guardamos la hora elegida como texto ("07:22")
+  estado    String   @default("programada") // "programada" o "realizada"
+  fechaCreacion DateTime @default(now())
+  @@index([usuarioId])  
+  @@index([medicoId])
+}
+model Receta {
+  id            String   @id @default(uuid())
+  usuarioId     String   // Asociada al paciente (el "loco" o usuario activo)
+  medicoNombre  String   // Nombre de la doctora que la emitió
+  medicamentos  String   // Texto con los remedios (ej: "Paracetamol 500mg cada 8 horas")
+  observaciones String?  // Indicaciones extra
+  fechaCreacion DateTime @default(now())
+}
+
+model Examen {
+  id            String   @id @default(uuid())
+  usuarioId     String   // ID del paciente
+  tipoExamen    String   // Ej: "Hemograma", "Radiografía de Tórax"
+  resultado     String   // Ej: "Glóbulos rojos normales", "Sin hallazgos patológicos"
+  medicoNombre  String   // Qué doctor lo subió
+  fechaCreacion DateTime @default(now())
+}
+
+model Seguimiento {
+  id            String   @id @default(uuid())
+  usuarioId     String   // ID del paciente
+  indicacion    String   // La orden médica dada (ej: "Tomar paracetamol")
+  cumplio       String   // Guardará "SI" o "NO" según el botón que presione
+  fechaRegistro DateTime @default(now())
+}
+
+model Mensaje {
+  id             String   @id @default(uuid())
+  usuarioId      String
+  remitente_tipo String
+  texto          String
+  leido          Boolean  @default(false)
+  fecha          DateTime @default(now())
+   @@index([usuarioId]) 
+}

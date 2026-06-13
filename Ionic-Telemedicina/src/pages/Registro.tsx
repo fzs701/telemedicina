@@ -38,7 +38,9 @@ const Registro: React.FC = () => {
         nombre: nombre.trim(),
         correo: correo.trim(),
         contrasena: pass.trim(),
-        rol: 'paciente' // Todo usuario creado desde aquí entra como paciente
+        rol: 'paciente', // Todo usuario creado desde aquí entra como paciente
+        region: region.trim(),  
+        comuna: comuna.trim()
       };
 
       await registrarUsuarioApi(datosParaBackend);

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { enviarAlertaCritico } from '../servicios/emailService';
 
 const prisma = new PrismaClient();
 
@@ -7,7 +8,7 @@ export const crearRegistroSalud = async (req: Request, res: Response): Promise<a
   try {
     const { usuarioId, nivelDolor, sintomas, presionArterial, pulso, temperatura, observaciones } = req.body;
 
-    //Validaciones datos obligatorios 
+    // Validaciones datos obligatorios 
     if (!usuarioId || nivelDolor === undefined || !sintomas || !presionArterial || !pulso || !temperatura) {
       return res.status(400).json({ 
         ok: false, 
@@ -20,7 +21,7 @@ export const crearRegistroSalud = async (req: Request, res: Response): Promise<a
       estadoCalculado = 'Crítico';
     }
 
-    // guardar  usando Prisma
+    // Guardar usando Prisma
     const nuevoRegistro = await prisma.registroSalud.create({
       data: {
         usuarioId,
@@ -34,10 +35,21 @@ export const crearRegistroSalud = async (req: Request, res: Response): Promise<a
       }
     });
 
-    
+    // Enviar email si estado es Crítico
+    if (estadoCalculado === 'Crítico') {
+      const paciente = await prisma.usuario.findUnique({
+        where: { id: usuarioId },
+        include: { medico: { select: { correo: true, nombre: true } } }
+      }) as any;
+
+      if (paciente?.medico?.correo) {
+        await enviarAlertaCritico(paciente.nombre, sintomas, paciente.medico.correo);
+      }
+    }
+
     res.status(201).json({
       ok: true,
-      mensaje: 'Registro de salud guardado con éxito. ¡Sincronizado! ',
+      mensaje: 'Registro de salud guardado con éxito.',
       data: nuevoRegistro
     });
 
@@ -59,12 +71,8 @@ export const obtenerRegistrosPorPaciente = async (req: Request, res: Response): 
     }
 
     const registros = await prisma.registroSalud.findMany({
-      where: { 
-        usuarioId: usuarioId 
-      },
-      orderBy: { 
-        fechaCreacion: 'desc' 
-      }
+      where: { usuarioId },
+      orderBy: { fechaCreacion: 'desc' }
     });
 
     const ultimoRegistro = registros.length > 0 ? registros[0] : null;

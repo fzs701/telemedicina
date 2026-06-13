@@ -6,10 +6,10 @@ import jwt from 'jsonwebtoken';
 const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'clave_secreta_pucv_2026';
 
-// LOGICA DE REGISTRO
+// registro
 export const registrarUsuario = async (req: Request, res: Response): Promise<any> => {
   try {
-    const { rut, nombre, correo, contrasena, rol, medicoId } = req.body;
+    const { rut, nombre, correo, contrasena, rol, region, comuna, medicoId } = req.body;
 
     // Validación básica de campos obligatorios 
     if (!rut || !nombre || !correo || !contrasena || !rol) {
@@ -37,6 +37,8 @@ export const registrarUsuario = async (req: Request, res: Response): Promise<any
         correo,
         contrasena: contrasenaEncriptada,
         rol, // Puede ser "paciente" o "medico"
+        region: region || null,   
+        comuna: comuna || null,  
         medicoId: medicoId || null // Si no viene médico, queda nulo
       }
     });

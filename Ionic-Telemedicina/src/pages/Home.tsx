@@ -15,35 +15,72 @@ const Home: React.FC = () => {
     const estadoInicial = localStorage.getItem('clinicoEstado') || 'No registrado';
     const sintomasIniciales = localStorage.getItem('clinicoSintomas') || 'Sin síntomas registrados';
 
-    const [dolorReal, setDolorReal] = useState(localStorage.getItem('clinicoDolor') || 'No registrado');
-    const [estadoReal, setEstadoReal] = useState(estadoInicial);
-    const [sintomasReales, setSintomasReales] = useState(sintomasIniciales);
+    const [estadoSalud, setEstadoSalud] = useState('No registrado');
+    const [sintomasSalud, setSintomasSalud] = useState('Sin síntomas registrados');
+    const [dolorSalud, setDolorSalud] = useState('No registrado');
+    const [fechaUltimo, setFechaUltimo] = useState('Nunca');
+    const [proximaCitaReal, setProximaCitaReal] = useState('Sin registrar');
 
     useEffect(() => {
         if (usuarioId) {
-            fetch(`http://localhost:3000/api/registro-salud/${usuarioId}`)
+            fetch(`http://localhost:3000/api/citas/usuario/${usuarioId}`)
             .then(res => res.json())
             .then(data => {
-                if (data.ok && data.ultimo) {
-                    setEstadoReal(data.ultimo.estado || 'No registrado');
-                    setSintomasReales(data.ultimo.sintomas || 'Sin síntomas registrados')
-                    if (data.ultimo.nivelDolor !== undefined && data.ultimo.nivelDolor !== null) {
-                        setDolorReal(`Nivel ${data.ultimo.nivelDolor}`);
-                    } else {
-                        setDolorReal('No registrado');
-                    }
-                }
-            })
-            
-            .catch(err => console.error("Error al actualizar datos desde la BD:", err));
+            if (data.ok && data.citas && data.citas.length > 0) {
+                const masPrxima = data.citas[0];
+                setProximaCitaReal(`${masPrxima.fecha} a las ${masPrxima.hora} hrs con ${masPrxima.medico_nombre || 'Especialista'}`);
+            } else {
+               setProximaCitaReal('Sin registrar');
+            }
+        })
+        .catch(err => console.error("Error al cargar próxima cita en Home:", err));
+    }
+    }, [usuarioId]);
+    useEffect(() => {
+        const actualizarDesdeStorage = () => {
+        const est = localStorage.getItem('clinicoEstado');
+        const sin = localStorage.getItem('clinicoSintomas');
+        const dol = localStorage.getItem('clinicoDolor');
+        const fec = localStorage.getItem('ultimoRegistroFecha');
+
+        if (est && est !== 'undefined') setEstadoSalud(est);
+        if (sin && sin !== 'undefined') setSintomasSalud(sin);
+        if (dol && dol !== 'undefined') setDolorSalud(dol);
+        if (fec && fec !== 'undefined') setFechaUltimo(fec);
+    };
+
+    actualizarDesdeStorage();
+
+    // Escuchar cambios en localStorage
+    window.addEventListener('storage', actualizarDesdeStorage);
+    return () => window.removeEventListener('storage', actualizarDesdeStorage);
+    }, []);
+    const mensajeMedico = localStorage.getItem('clinicoMensaje') && localStorage.getItem('clinicoMensaje') !== 'undefined'
+       ? localStorage.getItem('clinicoMensaje')
+        : 'No tienes mensajes nuevos.';
+
+    const [mensajeReal, setMensajeReal] = useState(mensajeMedico);
+
+    useEffect(() => {
+        if (!usuarioId) return;
+        fetch(`http://localhost:3000/api/mensajes/usuario/${usuarioId}`)
+        .then(res => res.json())
+        .then(data => {
+        if (data.ok && data.mensajes && data.mensajes.length > 0) {
+        // Buscar el último mensaje del médico
+           const mensajesDelMedico = data.mensajes.filter((m: any) => m.remitente_tipo === 'medico');
+            if (mensajesDelMedico.length > 0) {
+              const ultimo = mensajesDelMedico[mensajesDelMedico.length - 1];
+              setMensajeReal(ultimo.texto);
+            }
         }
+    })
+    .catch(() => {});
     }, [usuarioId]);
     
     
     const nombreUsuario = localStorage.getItem('usuarioNombre') || 'Paciente';
-    const estadoSalud = localStorage.getItem('clinicoEstado') && localStorage.getItem('clinicoEstado') !== 'undefined' 
-       ? localStorage.getItem('clinicoEstado') 
-       : 'No registrado';
+    
     
     const sintomas = localStorage.getItem('clinicoSintomas') && localStorage.getItem('clinicoSintomas') !== 'undefined'
         ? localStorage.getItem('clinicoSintomas')
@@ -56,11 +93,6 @@ const Home: React.FC = () => {
     const ultimaCita = localStorage.getItem('clinicoCita') && localStorage.getItem('clinicoCita') !== 'undefined'
         ? localStorage.getItem('clinicoCita')
         : 'Sin registrar';
-
-    const mensajeMedico = localStorage.getItem('clinicoMensaje') && localStorage.getItem('clinicoMensaje') !== 'undefined'
-        ? localStorage.getItem('clinicoMensaje')
-        : 'No tienes mensajes nuevos.';
-    
 
     return (
         <IonPage>
@@ -84,21 +116,25 @@ const Home: React.FC = () => {
                             </h2>
 
                             {/*resumen estado*/}
-                            <div className="tarjeta-resumen-salud">
+                            <div className="tarjeta-resumen-salud" onClick={() => router.push('/resumen-general')} style={{ cursor: 'pointer' }}>
                                 <div className="cabecera-amarilla">
                                     <span>⭐</span> Resumen estado de salud
                                 </div>
-                                <div className="cuerpo-resumen">
-                                    <div className="texto-resumen">
-                                        <p><strong>Último registro:</strong> {estadoReal === 'No registrado' ? 'Nunca' : 'Reciente'}</p>
-                                        <p><strong>Estado:</strong> <span style={{ color: estadoReal === 'Crítico' ? '#D32F2F' : '#388E3C' }}>{estadoReal}</span></p>
-                                        <p><strong>Síntomas:</strong> {sintomasReales}</p>
-                                    </div>
-                                    <div className="texto-resumen">
-                                        <p><strong>Dolor:</strong> {dolorReal}</p>
-                                        <p><strong>Estado reciente:</strong> <span style={{ color: estadoReal === 'Crítico' ? '#D32F2F' : '#388E3C' }}>{estadoReal}</span></p>
-                                    </div>
+                            <div className="cuerpo-resumen">
+                                 <div className="texto-resumen">
+                                     <p><strong>Último registro:</strong> {fechaUltimo === 'No registrado' ? 'Nunca' : 'Reciente'}</p>
+            
+                                     <p><strong>Estado:</strong> <span style={{ color: estadoSalud === 'Crítico' ? '#D32F2F' : '#388E3C', fontWeight: 'bold' }}>{estadoSalud}</span></p>
+           
+                                    <p><strong>Síntomas:</strong> {sintomasSalud}</p>
                                 </div>
+                            <div className="texto-resumen">
+            
+                                <p><strong>Dolor:</strong> {dolorSalud}</p>
+            
+                                <p><strong>Estado reciente:</strong> <span style={{ color: estadoSalud === 'Crítico' ? '#D32F2F' : '#388E3C', fontWeight: 'bold' }}>{estadoSalud}</span></p>
+                            </div>
+                             </div>
                             </div>
 
                             {/*cuadro de como se siente y registrar estado salud*/}
@@ -116,42 +152,47 @@ const Home: React.FC = () => {
                                 </div>
 
                                 {/*cuadro de videollamdas recientes*/}
-                                <div className="tarjeta-videollamada">
-                                    <div className="cabecera-verde-video">
-                                        <IonIcon icon={videocamOutline} /> Videollamada
+                                {/* Cuadro de videollamadas en Home.tsx */}
+                                <div className="tarjeta-videollamada" onClick={() => router.push('/videollamada-paciente')} style={{ cursor: 'pointer' }}>
+                                     <div className="cabecera-verde-video">
+                                          <IonIcon icon={videocamOutline} /> Videollamada
                                     </div>
                                     <div style={{ padding: '15px 10px', textAlign: 'center' }}>
                                         <p style={{ margin: '3px 0', fontSize: '12px', color: '#333' }}>
-                                           <strong>Última cita:</strong> {ultimaCita}
+                                            <strong>Última cita:</strong> Sin registrar
                                         </p>
                                         <p style={{ margin: '3px 0', fontSize: '12px', color: '#333' }}>
-                                            <strong>Próxima cita:</strong> Sin registrar
-                                        </p>
+                                             <strong>Próxima cita:</strong> {proximaCitaReal}
+                                         </p>
                                     </div>
-                                </div>
+                                   </div>
                             </div>
 
                             {/*cuadro de chat y mensajes*/}
                             <div className="seccion-inferior">
-                                <div className="contenedor-icono-chat" onClick={() => router.push('/chat')}>
-                                    <div className="caja-borde-chat">
+
+                                {/* Ícono de chat clickeable */}
+                                <div className="contenedor-icono-chat" onClick={() => router.push('/chat')} style={{ cursor: 'pointer' }}>
+                                     <div className="caja-borde-chat">
                                         <IonIcon icon={notificationsOutline} style={{ fontSize: '22px' }} />
-                                    </div>
+                                      </div>
                                     <span style={{ fontSize: '11px', fontWeight: 'bold', display: 'block', marginTop: '4px' }}>Chat</span>
                                 </div>
 
-                                <div className="tarjeta-mensaje-enfermera">
-                                    <div className="cabecera-celeste-mensaje">
-                                        <UserAvatar size="18px" /> 
-                                        <span>Mensaje</span>
-                                    </div>
-                                    <div style={{ padding: '12px 20px' }}>
-                                        <p style={{ margin: 0, fontSize: '14px', color: '#333', lineHeight: '1.3' }}>
-                                           {mensajeMedico}
-                                        </p>
-                                    </div>
+                           {/* Tarjeta de mensaje clickeable */}
+                            <div className="tarjeta-mensaje-enfermera" onClick={() => router.push('/chat')} style={{ cursor: 'pointer' }}>
+                               <div className="cabecera-celeste-mensaje">
+                                   <UserAvatar size="18px" /> 
+                                   <span>Mensaje</span>
+                                 </div>
+                                <div style={{ padding: '12px 20px' }}>
+                                    <p style={{ margin: 0, fontSize: '14px', color: '#333', lineHeight: '1.3' }}>
+                                     {mensajeReal}
+                                      </p>
                                 </div>
                             </div>
+
+                         </div>
 
                         </IonCol>
                     </IonRow>

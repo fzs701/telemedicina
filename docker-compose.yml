@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  database:
+    image: mysql:8.0
+    container_name: telemedicina_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: telemedicina_db
+      MYSQL_USER: telemedicina_user
+      MYSQL_PASSWORD: telemedicina_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./nodejs-Telemedicina
+    container_name: telemedicina_backend
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=mysql://root:1234@mysql_db:3306/telemedicina_db
+      - JWT_SECRET=clave_secreta_pucv_2026
+      - EMAIL_USER=francisca.zamora.s@mail.pucv.cl
+      - EMAIL_PASS=wfdebtujidhsuppf
+    depends_on:
+      - mysql_db
+
+  frontend:
+    build: ./Ionic-Telemedicina
+    container_name: telemedicina_frontend
+    ports:
+      - "8100:8100"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
