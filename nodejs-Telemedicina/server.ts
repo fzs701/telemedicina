@@ -26,6 +26,7 @@ app.use(cors({
 }));
 
 // Rate limiting
+{/* 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
@@ -40,8 +41,8 @@ const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
   message: { ok: false, mensaje: 'Demasiados intentos de login. Espera 15 minutos.' }
-});
-app.use('/api/login', loginLimiter);
+});*/}
+//app.use('/api/login', loginLimiter);
 
 app.use(express.json({ limit: '10mb' }));
 

@@ -1,13 +1,12 @@
 import { Router } from 'express';
 import { crearRegistroSalud, obtenerRegistrosPorPaciente } from '../controladores/registroSaludController';
 import { PrismaClient } from '@prisma/client';
-import { verificarToken } from '../middlewares/verificarToken';
 
 const router = Router();
 const prisma = new PrismaClient();
 
 router.post('/registro-salud', crearRegistroSalud);
-router.get('/registro-salud/:usuarioId', verificarToken, obtenerRegistrosPorPaciente);
+router.get('/registro-salud/:usuarioId', obtenerRegistrosPorPaciente);
 
 
 router.put('/registro-salud/:id', async (req, res) => {

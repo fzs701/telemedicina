@@ -11,11 +11,34 @@ const ResumenPacientes: React.FC = () => {
   const [pacientes, setPacientes] = useState<any[]>([]);
 
   useEffect(() => {
-    if (!medicoId) return;
-    fetch(`http://localhost:3000/api/medico/${medicoId}/dashboard`)
-      .then(res => res.json())
-      .then(data => { if (data.ok) setPacientes(data.pacientes); });
-  }, [medicoId]);
+  if (!medicoId) return;
+  
+  fetch(`http://localhost:3000/api/mensajes/medico/${medicoId}`)
+    .then(res => res.json())
+    .then(async data => {
+      if (!data.ok) return;
+      
+      // Para cada paciente, buscar su último registro de salud
+      const pacientesConEstado = await Promise.all(
+        data.pacientes.map(async (p: any) => {
+          try {
+            const token = localStorage.getItem('token');
+            const res = await fetch(`http://localhost:3000/api/registro-salud/${p.id}`, {
+              headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const reg = await res.json();
+            return {
+              ...p,
+              estado: reg.ok && reg.ultimo ? reg.ultimo.estado : 'Estable'
+            };
+          } catch {
+            return { ...p, estado: 'Estable' };
+          }
+        })
+      );
+      setPacientes(pacientesConEstado);
+    });
+}, [medicoId]);
 
   const colorEstado = (estado: string) => {
     if (estado === 'Crítico') return '#e53935';
