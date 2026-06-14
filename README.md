@@ -49,6 +49,8 @@ En la terminal escribir: **cd nodejs-Telemedicina**
    - Cambie TU_USUARIO por su usuario de MySQL (que casi siempre es root).
 
    - Cambie TU_CONTRASENA por la clave con la que usted entra a su Workbench.
+   - EMAIL_USER=tu_correo@gmail.com
+   - EMAIL_PASS=tu_app_password_gmail   (Para obtener pass, activar la Verificación en 2 Pasos google, luego en Contraseñas de aplicación le pones telemedicina y lo que te de copias)
 
 3. Generar el Cliente de Prisma
    
