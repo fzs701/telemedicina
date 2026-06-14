@@ -19,7 +19,7 @@ app.use(helmet());
 
 // CORS seguro: solo permite el frontend
 app.use(cors({
-  origin: ['http://localhost:8100', 'http://localhost:8101', 'http://localhost:8102', 'http://localhost:8103', 'http://localhost:8104'],
+  origin: ['http://localhost:8100', 'http://localhost:8101', 'http://localhost:8102', 'http://localhost:8103', 'http://localhost:8104', 'http://localhost:8105', 'http://localhost:8106', 'http://localhost:8107'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
