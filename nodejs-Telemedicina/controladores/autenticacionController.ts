@@ -29,6 +29,11 @@ export const registrarUsuario = async (req: Request, res: Response): Promise<any
     const sal = await bcrypt.genSalt(10);
     const contrasenaEncriptada = await bcrypt.hash(contrasena, sal);
 
+    // Buscar primer médico disponible para asignar al paciente
+    const primerMedico = await prisma.usuario.findFirst({
+      where: { rol: 'medico' }
+    });
+
     // Guardar en la base de datos 
     const nuevoUsuario = await prisma.usuario.create({
       data: {
@@ -39,7 +44,7 @@ export const registrarUsuario = async (req: Request, res: Response): Promise<any
         rol, // Puede ser "paciente" o "medico"
         region: region || null,   
         comuna: comuna || null,  
-        medicoId: medicoId || null // Si no viene médico, queda nulo
+         medicoId: rol === 'paciente' ? (primerMedico?.id || null) : null
       }
     });
 

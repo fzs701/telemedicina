@@ -98,8 +98,9 @@ const Login: React.FC = () => {
                     )}
                   </div>
 
-                  <p style={{ textAlign: 'right', color: 'black', marginBottom: '24px', cursor: 'pointer' }}>
-                    Olvidé mi contraseña
+                  <p onClick={() => alert('Para recuperar tu contraseña contacta a soporte:\nsoporte@telemedicinasantodomingo.cl')}
+                     style={{ textAlign: 'right', color: '#00875E', marginBottom: '24px', cursor: 'pointer', textDecoration: 'underline' }}>
+                     Olvidé mi contraseña
                   </p>
 
                   <IonButton expand='block' onClick={manejarIngreso} style={{ '--background': '#00875E', height: '50px', fontWeight: 'bold' }}>

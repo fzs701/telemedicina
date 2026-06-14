@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -9,6 +11,9 @@ const transporter = nodemailer.createTransport({
 });
 
 export const enviarAlertaCritico = async (nombrePaciente: string, sintomas: string, medicoCorreo: string) => {
+  console.log('EMAIL_USER:', process.env.EMAIL_USER);
+  console.log('Enviando a:', medicoCorreo);
+
   try {
     await transporter.sendMail({
       from: `"Telemedicina" <${process.env.EMAIL_USER}>`,
@@ -25,7 +30,7 @@ export const enviarAlertaCritico = async (nombrePaciente: string, sintomas: stri
         </div>
       `
     });
-    console.log(`Email de alerta enviado a ${medicoCorreo}`);
+    console.log('Email enviado a:', medicoCorreo);
   } catch (error) {
     console.error('Error al enviar email:', error);
   }

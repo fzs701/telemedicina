@@ -20,12 +20,12 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=mysql://root:1234@mysql_db:3306/telemedicina_db
+      - DATABASE_URL=mysql://root:1234@database:3306/telemedicina_db
       - JWT_SECRET=clave_secreta_pucv_2026
-      - EMAIL_USER=francisca.zamora.s@mail.pucv.cl
-      - EMAIL_PASS=wfdebtujidhsuppf
+      - EMAIL_USER=yellowritapink@gmail.com
+      - EMAIL_PASS=beowgocmujhqaqob
     depends_on:
-      - mysql_db
+      -  database
 
   frontend:
     build: ./Ionic-Telemedicina
