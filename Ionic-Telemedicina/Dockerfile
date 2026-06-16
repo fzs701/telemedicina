@@ -1,12 +1,14 @@
-FROM node:18-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 
 EXPOSE 8100
 
-CMD ["npx", "ionic", "serve", "--host", "0.0.0.0", "--port", "8100"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

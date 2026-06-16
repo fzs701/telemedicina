@@ -13,19 +13,32 @@ const app = express();
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
 
+app.set('trust proxy', 1);
+
 
 // Helmet
 app.use(helmet());
 
 // CORS seguro: solo permite el frontend
 app.use(cors({
-  origin: ['http://localhost:8100', 'http://localhost:8101', 'http://localhost:8102', 'http://localhost:8103', 'http://localhost:8104', 'http://localhost:8105', 'http://localhost:8106', 'http://localhost:8107'],
+  origin: (origin, callback) => {
+    const allowed = [
+      /^http:\/\/localhost:\d+$/,
+      /\.app\.github\.dev$/,
+      /\.github\.dev$/
+    ];
+    if (!origin || allowed.some(pattern => pattern.test(origin))) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 
-// Rate limiting
+// Rate limiting 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,

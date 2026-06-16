@@ -3,12 +3,11 @@ version: '3.8'
 services:
   database:
     image: mysql:8.0
-    container_name: telemedicina_db
+    container_name: mysql_db
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_ROOT_PASSWORD: '1234'
       MYSQL_DATABASE: telemedicina_db
-      MYSQL_USER: telemedicina_user
-      MYSQL_PASSWORD: telemedicina_pass
     ports:
       - "3306:3306"
     volumes:
@@ -16,7 +15,8 @@ services:
 
   backend:
     build: ./nodejs-Telemedicina
-    container_name: telemedicina_backend
+    container_name: api_backend
+    restart: always
     ports:
       - "3000:3000"
     environment:
@@ -25,13 +25,17 @@ services:
       - EMAIL_USER=yellowritapink@gmail.com
       - EMAIL_PASS=beowgocmujhqaqob
     depends_on:
-      -  database
+      - database
 
   frontend:
-    build: ./Ionic-Telemedicina
-    container_name: telemedicina_frontend
+    build:
+      context: ./Ionic-Telemedicina
+      args:
+        - VITE_API_URL=https://curly-space-carnival-wrxrvqwgx4qv3vg5-3000.app.github.dev/api
+    container_name: ionic_frontend
+    restart: always
     ports:
-      - "8100:8100"
+      - "8100:5173"
     depends_on:
       - backend
 
