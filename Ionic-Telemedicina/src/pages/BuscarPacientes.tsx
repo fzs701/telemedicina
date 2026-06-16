@@ -11,10 +11,11 @@ const BuscarPacientes: React.FC = () => {
   const [pacientes, setPacientes] = useState<any[]>([]);
   const [busqueda, setBusqueda] = useState('');
   const [seleccionado, setSeleccionado] = useState<any>(null);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   useEffect(() => {
     if (!medicoId) return;
-    fetch(`http://localhost:3000/api/medico/${medicoId}/dashboard`)
+    fetch(`${API_URL}/api/medico/${medicoId}/dashboard`)
       .then(res => res.json())
       .then(data => {
         if (data.ok) setPacientes(data.pacientes);

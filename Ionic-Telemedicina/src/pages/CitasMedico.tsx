@@ -12,6 +12,7 @@ const CitasMedico: React.FC = () => {
   const [citasPacientes, setCitasPacientes] = useState<any[]>([]);
   const [citasPropias, setCitasPropias] = useState<any[]>([]);
   const [cargando, setCargando] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   // HOY se declara ANTES de los filtros
   const hoy = new Date().toISOString().split('T')[0];
@@ -19,7 +20,7 @@ const CitasMedico: React.FC = () => {
   // Fetch 1: Citas donde la doctora ES el médico asignado (pacientes que la agendaron)
   useEffect(() => {
     if (!medicoId) return;
-    fetch(`http://localhost:3000/api/citas/medico/${medicoId}`, {
+    fetch(`${API_URL}/api/citas/medico/${medicoId}`, {
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
       .then(res => res.json())
@@ -34,7 +35,7 @@ const CitasMedico: React.FC = () => {
   // Fetch 2: Citas propias de la doctora (cuando ella misma agendó con alguien)
   useEffect(() => {
     if (!medicoId) return;
-    fetch(`http://localhost:3000/api/citas/usuario/${medicoId}`, {
+    fetch(`${API_URL}/api/citas/usuario/${medicoId}`, {
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
       .then(res => res.json())

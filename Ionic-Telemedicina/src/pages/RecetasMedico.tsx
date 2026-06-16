@@ -16,9 +16,10 @@ const RecetasMedico: React.FC = () => {
   const [observaciones, setObservaciones] = useState('');
   const [enviado, setEnviado] = useState(false);
   const [cargando, setCargando] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/mensajes/medico/${medicoId}`)
+    fetch(`${API_URL}/api/mensajes/medico/${medicoId}`)
       .then(res => res.json())
       .then(data => { if (data.ok) setPacientes(data.pacientes); })
       .catch(() => {});
@@ -28,7 +29,7 @@ const RecetasMedico: React.FC = () => {
     if (!pacienteSeleccionado || !medicamentos.trim()) return;
     setCargando(true);
     try {
-      const res = await fetch('http://localhost:3000/api/recetas', {
+      const res = await fetch(`${API_URL}/api/recetas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

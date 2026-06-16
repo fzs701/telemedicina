@@ -18,6 +18,7 @@ const Registro: React.FC = () => {
   const [confirmPass, setConfirmPass] = useState('');
   const [aceptaTerminos, setAceptaTerminos] = useState(false);
   const [intentoEnviar, setIntentoEnviar] = useState(false);
+  
 
   const manejarRegistro = async () => {
     setIntentoEnviar(true);

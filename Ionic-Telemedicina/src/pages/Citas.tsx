@@ -10,14 +10,15 @@ const Citas: React.FC = () => {
   const [citas, setCitas] = useState<any[]>([]);
   const usuarioId = localStorage.getItem('usuarioId');
   const [citasPacientes, setCitasPacientes] = useState<any[]>([]); 
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
   
-  // 🟢 AGREGA ESTA LÍNEA (Para arreglar el error de rol)
+  
   const rol = localStorage.getItem('usuarioRol'); // "medico" o "paciente"
 
   useEffect(() => {
     if (usuarioId) {
-      // 1. Cargar citas personales del que está logueado (Citas Propias)
-      fetch(`http://localhost:3000/api/citas/usuario/${usuarioId}`, {
+      // Cargar citas personales 
+      fetch(`${API_URL}/api/citas/usuario/${usuarioId}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       })
         .then(res => res.json())
@@ -28,16 +29,14 @@ const Citas: React.FC = () => {
         })
         .catch(err => console.error("Error al traer citas personales:", err));
 
-      // 2. VISTA EXCLUSIVA DOCTORA: Buscamos qué pacientes agendaron con SU id médico
+      // Buscamos qué pacientes agendaron con SU id médico
       if (rol === 'medico') {
-        // CAMBIO CRÍTICO: Consultamos las citas del backend donde actúas como médico asignado
-        fetch(`http://localhost:3000/api/citas/usuario/${usuarioId}`) 
+        fetch(`${API_URL}/api/citas/usuario/${usuarioId}`)
           .then(res => res.json())
           .then(data => {
             if (data.ok && data.citas && data.citas.length > 0) {
               setCitasPacientes(data.citas);
             } else {
-              // FALLBACK INMEDIATO: Si MySQL está vacío, poblamos dinámicamente con los pacientes de tu maqueta
               console.log("No hay citas en MySQL. Cargando datos simulados para la demo...");
               setCitasPacientes([
                 {

@@ -15,6 +15,7 @@ const MedicoDashboard: React.FC = () => {
     const medicoId = localStorage.getItem('usuarioId');
 
     const [pacientes, setPacientes] = useState<any[]>([]);
+    const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
     
     // Estado para la próxima videollamada real de la Doctora
     const [proximaCita, setProximaCita] = useState<string>('Sin registrar');
@@ -27,7 +28,7 @@ const MedicoDashboard: React.FC = () => {
     useEffect(() => {
         if (medicoId) {
             // Cargar pacientes críticos de la BD 
-            fetch(`http://localhost:3000/api/medico/${medicoId}/dashboard`) 
+            fetch(`${API_URL}/api/medico/${medicoId}/dashboard`)
             .then(res => res.json())
             .then(data => {
                 if (data.ok) {
@@ -37,8 +38,7 @@ const MedicoDashboard: React.FC = () => {
             .catch(err => console.error("Error al cargar la BD de pacientes:", err));
 
             // Buscamos la agenda de la doctora en MySQL
-            fetch(`http://localhost:3000/api/citas/medico/${medicoId}`)
-            fetch(`http://localhost:3000/api/citas/medico/${medicoId}`)
+            fetch(`${API_URL}/api/citas/medico/${medicoId}`)
             .then(res => res.json())
             .then(data => {
              if (data.ok && data.citas && data.citas.length > 0) {
@@ -68,7 +68,7 @@ const MedicoDashboard: React.FC = () => {
 
     useEffect(() => {
         if (!medicoId) return;
-        fetch(`http://localhost:3000/api/mensajes/medico/${medicoId}`)
+        fetch(`${API_URL}/api/mensajes/medico/${medicoId}`)
         .then(res => res.json())
         .then(data => {
         if (data.ok && data.pacientes && data.pacientes.length > 0) {

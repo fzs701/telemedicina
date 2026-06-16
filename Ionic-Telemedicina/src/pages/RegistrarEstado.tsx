@@ -21,6 +21,7 @@ const RegistroEstado: React.FC = () => {
   const [temperatura, setTemperatura] = useState('');
   const [observaciones, setObservaciones] = useState('');
   const [usuarioId, setUsuarioId] = useState<string | null>(null);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   useEffect(() => {
     const usuarioLogueado = localStorage.getItem('usuario');
@@ -82,7 +83,7 @@ const RegistroEstado: React.FC = () => {
 
     try {
       // para evitar bloqueos de URLs o prefijos falsos
-      const response = await fetch('http://localhost:3000/api/registro-salud', {
+      const response = await fetch(`${API_URL}/api/registro-salud`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payloadClinico)

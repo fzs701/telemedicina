@@ -11,6 +11,7 @@ const FichaPaciente: React.FC = () => {
   const [ultimo, setUltimo] = useState<any>(null);
   const [infoPaciente, setInfoPaciente] = useState<any>(null);
   const [cargando, setCargando] = useState(true);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   const paciente = JSON.parse(localStorage.getItem('pacienteSeleccionado') || '{}');
 
@@ -18,7 +19,7 @@ const FichaPaciente: React.FC = () => {
     if (!paciente.id) return;
 
     // Cargar registros clínicos
-    fetch(`http://localhost:3000/api/registro-salud/${paciente.id}`)
+    fetch(`${API_URL}/api/registro-salud/${paciente.id}`)
       .then(res => res.json())
       .then(data => {
         if (data.ok) {
@@ -30,7 +31,7 @@ const FichaPaciente: React.FC = () => {
       .finally(() => setCargando(false));
 
     // Cargar info completa del usuario 
-    fetch(`http://localhost:3000/api/usuario/${paciente.id}`)
+    fetch(`${API_URL}/api/usuario/${paciente.id}`)
       .then(res => res.json())
       .then(data => {
         if (data.ok) setInfoPaciente(data.usuario);

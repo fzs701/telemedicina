@@ -11,9 +11,11 @@ const VideollamadaMedico: React.FC = () => {
   const [citas, setCitas] = useState<any[]>([]);
   const [citaActiva, setCitaActiva] = useState<any>(null);
   const [enLlamada, setEnLlamada] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   useEffect(() => {
-  fetch(`http://localhost:3000/api/citas/medico/${medicoId}`)
+  
+fetch(`${API_URL}/api/citas/medico/${medicoId}`)
     .then(res => res.json())
     .then(data => {
       if (data.ok) {

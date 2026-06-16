@@ -20,10 +20,11 @@ const Home: React.FC = () => {
     const [dolorSalud, setDolorSalud] = useState('No registrado');
     const [fechaUltimo, setFechaUltimo] = useState('Nunca');
     const [proximaCitaReal, setProximaCitaReal] = useState('Sin registrar');
+    const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
     useEffect(() => {
         if (usuarioId) {
-            fetch(`http://localhost:3000/api/citas/usuario/${usuarioId}`)
+            fetch(`${API_URL}/api/citas/usuario/${usuarioId}`)
             .then(res => res.json())
             .then(data => {
             if (data.ok && data.citas && data.citas.length > 0) {
@@ -63,7 +64,7 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         if (!usuarioId) return;
-        fetch(`http://localhost:3000/api/mensajes/usuario/${usuarioId}`)
+         fetch(`${API_URL}/api/mensajes/usuario/${usuarioId}`)
         .then(res => res.json())
         .then(data => {
         if (data.ok && data.mensajes && data.mensajes.length > 0) {

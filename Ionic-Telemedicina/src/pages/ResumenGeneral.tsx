@@ -15,6 +15,7 @@ const ResumenGeneral: React.FC = () => {
   const [historialSeguimiento, setHistorialSeguimiento] = useState<any[]>([]);
   const [proximaCita, setProximaCita] = useState('Sin citas próximas');
   const [medicoNombre, setMedicoNombre] = useState('Sin registrar');
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   useEffect(() => {
     const est = localStorage.getItem('clinicoEstado');
@@ -29,7 +30,7 @@ const ResumenGeneral: React.FC = () => {
     if (user) {
       const parsedUser = JSON.parse(user);
     
-      fetch(`http://localhost:3000/api/citas/usuario/${parsedUser.id}`)
+      fetch(`${API_URL}/api/citas/usuario/${parsedUser.id}`)
         .then(res => res.json())
         .then(data => {
         if (data.ok && data.citas) {

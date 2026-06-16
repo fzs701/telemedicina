@@ -8,11 +8,12 @@ import MenuNavegacion from '../components/MenuNavegacion';
 const Indicaciones: React.FC = () => {
   const history = useHistory();
   const [seguimientos, setSeguimientos] = useState<any[]>([]);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   useEffect(() => {
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     if (!usuario.id) return;
-    fetch(`http://localhost:3000/api/seguimiento/usuario/${usuario.id}`)
+    fetch(`${API_URL}/api/seguimiento/usuario/${usuario.id}`)
       .then(res => res.json())
       .then(data => { if (data.ok) setSeguimientos(data.historial || []); })
       .catch(() => {});

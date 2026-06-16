@@ -14,6 +14,7 @@ const EnviarRecomendacion: React.FC = () => {
   const [indicacion, setIndicacion] = useState('');
   const [enviado, setEnviado] = useState(false);
   const [cargando, setCargando] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   // Si viene desde FichaPaciente, preseleccionar paciente
   useEffect(() => {
@@ -25,7 +26,7 @@ const EnviarRecomendacion: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/mensajes/medico/${medicoId}`)
+    fetch(`${API_URL}/api/mensajes/medico/${medicoId}`)
       .then(res => res.json())
       .then(data => { if (data.ok) setPacientes(data.pacientes); })
       .catch(() => {});
@@ -35,7 +36,7 @@ const EnviarRecomendacion: React.FC = () => {
     if (!pacienteSeleccionado || !indicacion.trim()) return;
     setCargando(true);
     try {
-      const res = await fetch('http://localhost:3000/api/seguimiento/medico/enviar', {
+      const res = await fetch(`${API_URL}/api/seguimiento/medico/enviar`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ usuarioId: pacienteSeleccionado, indicacion })

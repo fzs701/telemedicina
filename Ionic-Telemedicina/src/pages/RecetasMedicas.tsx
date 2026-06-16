@@ -15,6 +15,7 @@ const RecetasMedicas: React.FC = () => {
 
   // Para vista médico — crear receta
   const [pacientes, setPacientes] = useState<any[]>([]);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
   const [pacienteId, setPacienteId] = useState('');
   const [medicamentos, setMedicamentos] = useState('');
   const [observaciones, setObservaciones] = useState('');
@@ -27,7 +28,7 @@ const RecetasMedicas: React.FC = () => {
 
     // Si es médico, cargar sus pacientes para el selector
     if (rol === 'medico' && id) {
-      fetch(`http://localhost:3000/api/medico/${id}/dashboard`)
+      fetch(`${API_URL}/api/medico/${id}/dashboard`)
         .then(res => res.json())
         .then(data => { if (data.ok) setPacientes(data.pacientes); });
     }

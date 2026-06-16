@@ -13,16 +13,17 @@ const ChatMedico: React.FC = () => {
   const [mensajes, setMensajes] = useState<any[]>([]);
   const [nuevoMensaje, setNuevoMensaje] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   const cargarPacientes = () => {
-  fetch(`http://localhost:3000/api/mensajes/medico/${medicoId}`)
+  fetch(`${API_URL}/api/mensajes/medico/${medicoId}`)
     .then(res => res.json())
     .then(data => { if (data.ok) setPacientes(data.pacientes); })
     .catch(() => {});
 };
 
   const cargarMensajes = (pacienteId: string) => {
-    fetch(`http://localhost:3000/api/mensajes/usuario/${pacienteId}`)
+    fetch(`${API_URL}/api/mensajes/usuario/${pacienteId}`)
       .then(res => res.json())
       .then(data => { if (data.ok) setMensajes(data.mensajes || []); })
       .catch(() => {});

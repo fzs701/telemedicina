@@ -19,10 +19,11 @@ const Chat: React.FC = () => {
   const [nuevoMensaje, setNuevoMensaje] = useState('');
   const [nombreDoctora, setNombreDoctora] = useState('Especialista');
   const bottomRef = useRef<HTMLDivElement>(null);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   const cargarMensajes = () => {
     if (!usuarioId) return;
-    fetch(`http://localhost:3000/api/mensajes/usuario/${usuarioId}`)
+    fetch(`${API_URL}/api/mensajes/usuario/${usuarioId}`)
       .then(res => res.json())
       .then(data => {
         if (data.ok) {
@@ -50,7 +51,7 @@ const Chat: React.FC = () => {
     setMensajes(prev => [...prev, { remitente_tipo: 'paciente', texto }]);
     setNuevoMensaje('');
     try {
-      await fetch('http://localhost:3000/api/mensajes/enviar', {
+      await fetch(`${API_URL}/api/mensajes/enviar`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ usuarioId, remitente_tipo: 'paciente', texto })

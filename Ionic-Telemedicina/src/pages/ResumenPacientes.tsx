@@ -9,11 +9,12 @@ const ResumenPacientes: React.FC = () => {
   const history = useHistory();
   const medicoId = localStorage.getItem('usuarioId');
   const [pacientes, setPacientes] = useState<any[]>([]);
+  const API_URL = import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:3000';
 
   useEffect(() => {
   if (!medicoId) return;
   
-  fetch(`http://localhost:3000/api/mensajes/medico/${medicoId}`)
+  fetch(`${API_URL}/api/mensajes/medico/${medicoId}`)
     .then(res => res.json())
     .then(async data => {
       if (!data.ok) return;
@@ -23,7 +24,7 @@ const ResumenPacientes: React.FC = () => {
         data.pacientes.map(async (p: any) => {
           try {
             const token = localStorage.getItem('token');
-            const res = await fetch(`http://localhost:3000/api/registro-salud/${p.id}`, {
+            const res = await fetch(`${API_URL}/api/registro-salud/${p.id}`, {
               headers: { 'Authorization': `Bearer ${token}` }
             });
             const reg = await res.json();
