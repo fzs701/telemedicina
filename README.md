@@ -46,18 +46,20 @@ En la terminal escribir: **cd nodejs-Telemedicina**
 2. En la raíz de la carpeta nodejs-Telemedicina, cree un archivo nuevo llamado exactamente .env y pegue su línea de conexión con su usuario y contraseña de MySQL Server / Workbench:
 
     DATABASE_URL="mysql://TU_USUARIO:TU_CONTRASENA@localhost:3306/telemedicina_db?schema=sys"
+   
 
    - Cambie TU_USUARIO por su usuario de MySQL (que casi siempre es root).
 
    - Cambie TU_CONTRASENA por la clave con la que usted entra a su Workbench.
+   - JWT_SECRET=clave_secreta_pucv_2026
    - EMAIL_USER=tu_correo@gmail.com
    - EMAIL_PASS=tu_app_password_gmail   (Para obtener pass, activar la Verificación en 2 Pasos google, luego en Contraseñas de aplicación le pones telemedicina y lo que te de copias)
 
-3. Generar el Cliente de Prisma
+4. Generar el Cliente de Prisma
    
     **npx prisma generate**
    
-4. crear todas las tablas de forma automática:
+5. crear todas las tablas de forma automática:
    
     **npx prisma db push**
 
@@ -100,6 +102,8 @@ La aplicación se abrirá automáticamente en navegador predeterminado.
         aparecerá una advertencia de Codespaces → hacer clic en Continue
 
 La aplicación se abrirá en el navegador
+
+Docker genera una base de datos vacía. Crear un usuario desde "Crear cuenta" antes de iniciar sesión.
 
 (En Ionic-telemedicina, en carpeta **otros** se encuentra documentación proyecto)
 
