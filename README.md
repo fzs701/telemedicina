@@ -89,16 +89,17 @@ La aplicación se abrirá automáticamente en navegador predeterminado.
 
 **Opción 2:** Con Docker usando GitHub Codespaces
 
-1. En este github, hacer clic en Code → Codespaces → Create codespace on master
-2. Esperar a que el entorno cargue completamente
-3. En la terminal del Codespace ejecutar:
+1. **Crear un Fork**, en la esquina superior derecha de este repositorio, haga clic en el botón **Fork** para crear una copia del proyecto en su cuenta de GitHub.
+2. En su github, hacer clic en Code → Codespaces → Create codespace on master
+3. Esperar a que el entorno cargue completamente
+4. En la terminal del Codespace ejecutar:
 
      **docker compose up --build**
 
-4. Esperar a que los 3 servicios levanten (mysql, backend, frontend)
-5. Ir a la pestaña Puertos en la parte inferior
-6. Hacer clic derecho sobre el puerto 3000 → Visibilidad del puerto → Public
-7. En la misma pestaña, buscar el puerto 8100 y hacer clic en el ícono de globo 🌐 para abrir el frontend
+5. Esperar a que los 3 servicios levanten (mysql, backend, frontend)
+6. Ir a la pestaña Puertos en la parte inferior
+7. Hacer clic derecho sobre el puerto 3000 → Visibilidad del puerto → Public
+8. En la misma pestaña, buscar el puerto 8100 y hacer clic en el ícono de globo 🌐 para abrir el frontend
         aparecerá una advertencia de Codespaces → hacer clic en Continue
 
 La aplicación se abrirá en el navegador
