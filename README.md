@@ -99,7 +99,7 @@ La aplicación se abrirá automáticamente en navegador predeterminado.
 5. Esperar a que los 3 servicios levanten (mysql, backend, frontend)
 6. Ir a la pestaña Puertos en la parte inferior
 7. Hacer clic derecho sobre el puerto 3000 → Visibilidad del puerto → Public
-8. En la misma pestaña, buscar el puerto 8100 y hacer clic en el ícono de globo 🌐 para abrir el frontend
+8. En la misma pestaña, buscar el puerto 8100 y hacer clic en el ícono de globo para abrir el frontend
         aparecerá una advertencia de Codespaces → hacer clic en Continue
 
 La aplicación se abrirá en el navegador
